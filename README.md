@@ -1,1 +1,0 @@
-# Ruleta-de-la-suerte-

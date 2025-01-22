@@ -1,0 +1,69 @@
+# Ruleta-de-la-suerte-<!-- Canvas para la ruleta -->
+    <div class="ruleta-container">
+        <canvas id="ruleta" width="300" height="300"></canvas>
+        <div class="flecha"></div>
+    </div>
+
+    <!-- Botones -->
+    <button id="boton-girar" disabled>Girar</button>
+    <button class="menu-admin" id="boton-admin">Menú 𝘼𝘿𝙈𝙄𝙉</button>
+    <div class="retirar-container">
+        <input type="number" id="cantidad-retiro" placeholder="Cantidad (máx. 200)">
+        <input type="text" id="numero-retiro" placeholder="Número de teléfono">
+        <button id="boton-retirar">Retirar</button>
+    </div>
+    <button class="codigo-admin" id="boton-codigo-admin">Canjear Código</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializar usuario y funcionalidades principales
+            const usuarioNombreEl = document.getElementById('usuario-nombre');
+            const contadorMonedasEl = document.getElementById('contador-monedas');
+            const contadorIntentosEl = document.getElementById('contador-intentos');
+            const botonGirar = document.getElementById('boton-girar');
+            const cantidadRetiroEl = document.getElementById('cantidad-retiro');
+            const numeroRetiroEl = document.getElementById('numero-retiro');
+            const botonRetirar = document.getElementById('boton-retirar');
+
+            const usuario = {
+                nombre: Usuario#${Date.now().toString().slice(-4)},
+                monedas: 0,
+                intentos: 3
+            };
+
+            usuarioNombreEl.textContent = usuario.nombre;
+            contadorMonedasEl.textContent = usuario.monedas;
+            contadorIntentosEl.textContent = usuario.intentos;
+
+            botonGirar.disabled = usuario.intentos === 0;
+
+            // Función para retiro
+            botonRetirar.addEventListener('click', () => {
+                const cantidad = parseInt(cantidadRetiroEl.value);
+                const numero = numeroRetiroEl.value;
+
+                if (!cantidad  cantidad > 200  cantidad <= 0) {
+                    alert('Cantidad inválida. Máximo 200 monedas.');
+                    return;
+                }
+
+                if (!numero) {
+                    alert('Por favor, ingresa un número válido.');
+                    return;
+                }
+
+                if (usuario.monedas < cantidad) {
+                    alert('No tienes suficientes monedas.');
+                    return;
+                }
+
+                // Restar monedas y registrar solicitud
+                usuario.monedas -= cantidad;
+                contadorMonedasEl.textContent = usuario.monedas;
+
+                alert(Solicitud enviada: ${cantidad} monedas al número ${numero});
+            });
+        });
+    </script>
+</body>
+</html>
